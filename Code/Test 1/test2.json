@@ -4,11 +4,11 @@
     "width": 800,
     "height": 450,
     "title": "Shark Attacks in Australia",
-    "projection": {"type": "conicEquidistant"},
+    "projection": {"type": "equalEarth"},
     "layer": [
     {
         "data": {
-        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped2.topojson",
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
             "format": {
                 "type": "topojson",
                 "feature": "ne_50m_land"
@@ -22,7 +22,7 @@
     },
     {
     "data": {
-    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment%202%20Data/Australian_Shark_Incident_Database.csv",
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
     "format": {"type": "csv"}
         },
         "mark": {
@@ -30,13 +30,15 @@
             "tooltip": {"content": "data"}
         },
     "encoding": {
-        "longitude": {"field": "longitude", "type": "quantitative"},
-        "latitude": {"field": "latitude", "type": "quantitative"},
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
 
         "size": {"value": 10},
 
         "color": {
-            "scale":{"domain":["fatal", "injured"]}, "range":["blue","red"]
+            "field": "injury",
+            "type": "nominal",
+            "scale": {"domain": ["fatal", "injured"], "range": ["blue", "red"]}
     }
     }
     }
