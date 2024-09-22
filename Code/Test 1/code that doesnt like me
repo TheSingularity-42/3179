@@ -21,3 +21,17 @@
                     "scale": {"scheme":"accent"}
                 }
             }
+
+
+
+                    "tooltip": [
+            {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
+            {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
+            {"field": "shark", "type": "nominal", "title": "Shark Species"},
+            {"field": "activity", "type": "nominal", "title": "Activity"}
+        ]
+
+
+        "scale": {
+                    "domain": ["fatal", "injured","injury","uninjured","unknown",null], 
+                    "range": ["red", "blue","blue","green","black","black"]},
