@@ -8,7 +8,7 @@
     "layer": [
     {
         "data": {
-        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped.topojson",
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped2.topojson",
             "format": {
                 "type": "topojson",
                 "feature": "ne_50m_land"
