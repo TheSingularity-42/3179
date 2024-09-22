@@ -40,9 +40,9 @@
         },
         "tooltip": [
             {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
-            {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
-            {"field": "shark", "type": "nominal", "title": "Shark Species"},
-            {"field": "activity", "type": "nominal", "title": "Activity"}
+            {"field": "Incident.year", "type": "ordinal", "title": "Year Of Incident"},
+            {"field": "Shark.common.name", "type": "nominal", "title": "Shark Species"},
+            {"field": "Victim.activity", "type": "nominal", "title": "Activity"}
         ]
     }
     }
