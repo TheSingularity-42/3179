@@ -8,7 +8,7 @@
     {
         "data": {
             "url":
-            "https://github.com/TheSingularity-42/3179/VegaLite/Assignment 2 Data/clipped.json",
+            "https://raw.github.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped.json",
             "format": {
                     "type": "topojson",
                     "feature": "ne_50m_land"
