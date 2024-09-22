@@ -8,9 +8,37 @@
     {
         "data": {
             "url":
-            ""
-        }
-    }
+            "https://github.com/TheSingularity-42/3179/VegaLite/Assignment 2 Data/clipped.json",
+            "format": {
+                    "type": "topojson",
+                    "feature": "ne_50m_land"
+                },
+                "mark":{
+                    "type": "geoshape", 
+                    "fill": "lightgray",
+                    "stroke": "white"
+                }
+        },
+        "data":{
+            "url": 
+            "https://github.com/TheSingularity-42/3179/blob/755776246f4b891cd0b0878ac037323c55384435/VegaLite/Assignment%202%20Data/Australian_Shark_Incident_Database.csv"
+        },
+        "mark": {
+            "type": "circle", "tooltip": {"content": "data"}},
+
+            "encoding":{
+                "longitude":{"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude","type": "quantitative"},
+                "size":{
+                    "value":10
+                },
+                "color":{
+                    "field": "Victim.injury",
+                    "type": "nominal",
+                    "scale": {"scheme":"accent"}
+                }
+            }
+        }   
     ]
 
 }
