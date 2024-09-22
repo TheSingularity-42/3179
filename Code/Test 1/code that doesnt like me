@@ -1,0 +1,23 @@
+        /*
+        "data":{
+            "url": 
+            "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/Australian_Shark_Incident_Database.csv",
+            "format":{
+                "type": "csv"
+                }
+        },
+        "mark": {
+            "type": "circle", "tooltip": {"content": "data"}},
+
+            "encoding":{
+                "longitude":{"field": "longitude", "type": "quantitative"},
+                "latitude": {"field": "latitude","type": "quantitative"},
+                "size":{
+                    "value":10
+                },
+                "color":{
+                    "field": "Victim.injury",
+                    "type": "nominal",
+                    "scale": {"scheme":"accent"}
+                }
+            }
