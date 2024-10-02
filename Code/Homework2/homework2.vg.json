@@ -1,0 +1,31 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "vconcat": [
+        {
+            "width": 600,
+            "height": 200,
+            "mark": "area",
+            "encoding": {
+                "x":{"field":"year","type":"temporal","axis":{"title":"Injury Severity"}},
+                "y":{"aggregate": "count", "title": "Number of Attacks"},
+                "color":{"field":"injury"}
+            }
+
+        },
+        {
+            "width": 600,
+            "height": 200,
+            "mark": "bar",
+            "encoding": {
+                "x":{"field":"injury","type": "nominal"},
+                "y":{"aggregate":"count"}
+            }
+        }
+
+    ]
+
+
+}
