@@ -9,12 +9,22 @@
 </head>
 <body>
   
-<div id="final"></div>
+<div id="map"></div>
 
 <script type="text/javascript">
 
-  var spec2 = "Code/Homework/final.vg.json";
+  var spec2 = "Code/Homework2/final.vg.json";
   vegaEmbed('#final', spec2).then(function(result) {
+    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+  }).catch(console.error);
+</script>
+
+<div id="graph"></div>
+
+<script type="text/javascript">
+
+  var spec2 = "Code/Homework2/homework2.vg.json";
+  vegaEmbed('#graph', spec2).then(function(result) {
     // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
   }).catch(console.error);
 </script>

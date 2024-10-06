@@ -35,3 +35,6 @@
         "scale": {
                     "domain": ["fatal", "injured","injury","uninjured","unknown",null], 
                     "range": ["red", "blue","blue","green","black","black"]},
+
+
+                    {"calculate": "year(datum.year)","aggregate": "count", "as":"Sum"}

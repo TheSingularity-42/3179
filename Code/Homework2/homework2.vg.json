@@ -1,39 +1,81 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "data": {
-        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
     },
-    "vconcat": [
-        {
-            "width": 600,
-            "height": 200,
-            "mark": "line",
-            "transform": [
-                {"filter":"datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'" }
-            ],
-            "encoding": {
-                "x":{"field":"year","type":"temporal","axis":{"title":"Injury Severity"}},
-                "y":{"aggregate": "count", "title": "Number of Attacks"},
-                "color":{"field":"injury"}
-            }
-
-        },
-        {
-            "width": 600,
-            "height": 200,
-            "mark": "bar",
-            "transform": [
-                {"filter":"datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'" }
-            ],
-            "encoding": {
-                "x":{"field":"injury","type": "nominal"},
-                "y":{"aggregate":"count", "title":"Number Of Attacks"},
-                "color":{"field":"injury"}
-            }
-            
-        }
-
+    "transform": [
+    {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}
+    ],
+    "width": 900,
+    "height": 500,
+    "params": [{
+    "name": "start_year",
+    "value": 1800,
+    "bind": {
+    "name": "Start Year",
+    "input": "range", 
+    "min": 1800,
+    "max": 2020,
+    "step": 1
+    }
+    }],
+    "layer": [
+    {
+    "transform": [{"filter": "datum.Year >= start_year"}],
+    "mark": {
+    "type": "line"
+    },
+    "encoding": {
+    "x": {
+    "field": "Year",
+    "type": "temporal",
+    "title": "Year",
+    "axis": {"tickCount": 10}
+    },
+    "y": {
+    "field": "incidentcount",
+    "type": "quantitative",
+    "title": "Number of Attacks"
+    },
+    "color": {
+    "field": "injury",
+    "type": "nominal",
+    "scale": {
+    "domain": ["fatal", "injured", "uninjured"],
+    "range": ["red", "blue", "green"]
+    },
+    "title": "Injury Level",
+    "legend": {
+    "values": ["fatal", "injured", "uninjured"],
+    "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : 'Unknown'"
+    }
+    },
+    "tooltip": [
+    {"field": "Year", "type": "ordinal", "title": "Year"},
+    {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+    {"field": "injury", "type": "nominal", "title": "Injury Level"}
     ]
-
-
-}
+    }
+    },
+    {
+    "transform": [
+    {"filter": "datum.injury == 'fatal'"},
+    {"calculate": "'Most Number of Fatal Shark Attacks in Selected Period ' + datum['incidentcount']", "as": "annotation"},
+    {"calculate": "split(datum.annotation, ';')", "as": "annotation_edited"}
+    ],
+    "mark": {
+    "type": "text",
+    "align": "right",
+    "x":400,
+    "y": 100,
+    "baseline": "middle",
+    "fontStyle": "italic"
+    },
+    "encoding": {
+    "text": {"field": "annotation_edited"}
+    }
+    }
+    ]
+    }

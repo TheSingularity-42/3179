@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+</head>
+<body>
+<div id="vis"></div>
+<script>
+const spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "transform": [
+        {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+        {"calculate": "year(datum.year)", "as": "Year"},
+        {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}
+    ],
+        "width": 900,
+        "height": 500,
+        "params": [{
+        "name": "start_year",
+        "value": 1800,
+        "bind": {
+            "name": "Start Year",
+            "input": "range", 
+            "min": 1800,
+            "max": 2020,
+            "step": 1
+    }
+    }],
+    "layer": [
+    {
+        "transform": [{"filter": "datum.Year >= start_year"}],
+            "mark": {
+            "type": "line"
+        },
+        "encoding": {
+            "x": {
+            "field": "Year",
+            "type": "temporal",
+            "title": "Year",
+            "axis": {"tickCount": 10}
+        },
+        "y": {
+            "field": "incidentcount",
+            "type": "quantitative",
+            "title": "Number of Attacks"
+        },
+        "color": {
+            "field": "injury",
+            "type": "nominal",
+            "scale": {
+                "domain": ["fatal", "injured", "uninjured"],
+                "range": ["red", "blue", "green"]
+            },
+            "title": "Injury Level",
+            "legend": {
+                "values": ["fatal", "injured", "uninjured"],
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : 'Unknown'"
+            }
+        },
+        "tooltip": [
+            {"field": "Year", "type": "ordinal", "title": "Year"},
+            {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+            {"field": "injury", "type": "nominal", "title": "Injury Level"}
+        ]
+        }
+        },
+        {
+        "transform": [
+            {"filter": "datum.injury == 'fatal'"},
+            {"calculate": "'Most Number of Fatal Shark Attacks in Selected Period ' + datum['incidentcount']", "as": "annotation"},
+            {"calculate": "split(datum.annotation, ';')", "as": "annotation_edited"}
+        ],
+        "mark": {
+            "type": "text",
+            "align": "right",
+            "x":400,
+            "y": 100,
+            "baseline": "middle",
+            "fontStyle": "italic"
+        },
+        "encoding": {
+            "text": {"field": "annotation_edited"}
+        }
+        }
+        ]
+    };
+    vegaEmbed('#vis', spec);
+</script>
+</body>
+</html>
