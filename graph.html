@@ -91,5 +91,107 @@ const spec = {
     };
     vegaEmbed('#vis', spec);
 </script>
-</body>
+
+<div id="vis2"></div>
+<script>
+const spec = {
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 800,
+    "height": 450,
+    "title": "Shark Attacks in Australia After 2000",
+    "projection": {"type": "mercator"
+},
+    "layer": [
+    {
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_50m_land"
+            }
+        },
+    "mark": {
+        "type": "geoshape",
+        "fill": "#e6dcbe",
+        "stroke": "darkgray"
+        }
+    },
+
+    {
+    "data" : {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_50m_ocean"
+            }
+    },"mark": {
+        "type": "geoshape",
+        "fill": "#7ddcf1"
+        }
+    },
+
+    {
+    "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_30m_graticules_5"
+            }
+        },
+    "mark": {
+        "type": "geoshape",
+        "fill": "darkgray",
+        "stroke": "darkgray"
+        }
+
+    },
+
+    {
+    "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
+    "format": {"type": "csv"}
+        },
+        "mark": {
+            "type": "circle",
+            "tooltip": true
+        },
+        "transform": [
+            {"filter": "datum.Longitude > 110"},
+            {"filter": "datum.Longitude < 155"},
+            {"filter": "datum.year >2000"}
+        ],
+
+        "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "size": {"value": 15},
+
+        "color": {
+            "field": "injury",
+            "type": "nominal",
+            "scale": {
+            "domain": ["fatal", "injured", "uninjured", "unknown"],
+            "range": ["red", "blue", "green", "black"]
+            },
+            "title": "Injury Level",
+            "legend":{
+                "values": ["fatal","injured","uninjured","unknown"],
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'unknown' ? 'Unknown' : 'Unknown'"
+            }
+        },
+        
+        "tooltip": [
+            {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
+            {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
+            {"field": "shark", "type": "nominal", "title": "Shark Species"},
+            {"field": "activity", "type": "nominal", "title": "Activity"},
+            {"field": "Latitude", "type": "quantitative", "title": "Latitude"},
+            {"field": "Longitude", "type":"quantitative", "title": "Longitude"}
+        ]
+    }
+    }
+    ]
+    };
+    vegaEmbed('#vis', spec);
+</script>
 </html>
