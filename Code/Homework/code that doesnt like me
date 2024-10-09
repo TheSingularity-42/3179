@@ -38,3 +38,26 @@
 
 
                     {"calculate": "year(datum.year)","aggregate": "count", "as":"Sum"}
+
+
+
+
+                    ,
+    {
+    "transform": [
+    {"filter": "datum.injury == 'fatal'"},
+    {"calculate": "'Most Number of Fatal Shark Attacks in Selected Period ' + datum['incidentcount']", "as": "annotation"},
+    {"calculate": "split(datum.annotation, ';')", "as": "annotation_edited"}
+    ],
+    "mark": {
+    "type": "text",
+    "align": "right",
+    "x":400,
+    "y": 100,
+    "baseline": "middle",
+    "fontStyle": "italic"
+    },
+    "encoding": {
+    "text": {"field": "annotation_edited"}
+    }
+    }
