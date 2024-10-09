@@ -1,0 +1,19 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width" : 900,
+    "height" : 500,
+    "padding" : 5,
+    "data": [{
+    "name": "tree",
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
+    "transform" : [{
+        "type" : "stratify",
+        "key" : "id",
+        "parentKey": "parent"
+        }]
+        }
+    ]
+
+
+
+}
