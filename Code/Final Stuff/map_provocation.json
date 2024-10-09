@@ -57,6 +57,7 @@
     "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
     "format": {"type": "csv"}
         },
+        
         "mark": {
             "type": "circle",
             "tooltip": true
@@ -84,16 +85,7 @@
                 "values": ["fatal","injured","uninjured"],
                 "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'unknown' ? 'Unknown' : 'Unknown'"
             }
-        },
-        
-        "tooltip": [
-            {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
-            {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
-            {"field": "shark", "type": "nominal", "title": "Shark Species"},
-            {"field": "activity", "type": "nominal", "title": "Activity"},
-            {"field": "Latitude", "type": "quantitative", "title": "Latitude"},
-            {"field": "Longitude", "type":"quantitative", "title": "Longitude"}
-        ]
+        }
     }
     }
     ]

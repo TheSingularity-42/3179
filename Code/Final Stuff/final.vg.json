@@ -1,6 +1,27 @@
 
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "params": [{
+        "name": "start_year",
+        "value": 1800,
+        "bind": {
+        "name": "Start Year",
+        "input": "range", 
+        "min": 1800,
+        "max": 2020,
+        "step": 1
+        }
+        }],
+    "vconcat": [{
+
+
+
+
+
+
+
+
+
     "hconcat": [{
     "width": 500,
     "height": 450,
@@ -17,6 +38,7 @@
                 "feature": "ne_50m_land"
             }
         },
+        
     "mark": {
         "type": "geoshape",
         "fill": "#e6dcbe",
@@ -45,6 +67,7 @@
                 "feature": "ne_30m_graticules_5"
             }
         },
+        
     "mark": {
         "type": "geoshape",
         "fill": "darkgray",
@@ -65,7 +88,7 @@
         "transform": [
             {"filter": "datum.Longitude > 110"},
             {"filter": "datum.Longitude < 155"},
-            {"filter": "datum.year >2000"}
+            {"filter": "datum.year >= start_year"}
         ],
 
         "encoding": {
@@ -77,13 +100,13 @@
             "field": "injury",
             "type": "nominal",
             "scale": {
-            "domain": ["fatal", "injured", "uninjured"],
-            "range": ["red", "blue", "green", "black"]
+            "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "null"],
+            "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
             },
-            "title": "Injury Level",
+            "title": "Legend",
             "legend":{
-                "values": ["fatal","injured","uninjured"],
-                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'unknown' ? 'Unknown' : 'Unknown'"
+                "values": ["fatal","injured","uninjured","provoked", "unprovoked", "null"],
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked Attack': 'No data'"
             }
         },
         
@@ -98,7 +121,19 @@
     }
     }
     ]
-}, {"width": 500,
+},
+
+
+
+
+
+
+
+
+
+
+
+{"width": 500,
     "height": 450,
     "title": "Shark Attacks in Australia After 2000",
     "projection": {"type": "mercator",
@@ -153,15 +188,16 @@
     "data": {
     "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
     "format": {"type": "csv"}
-        },
-        "mark": {
+    },  
+
+    "mark": {
             "type": "circle",
             "tooltip": true
         },
         "transform": [
             {"filter": "datum.Longitude > 110"},
             {"filter": "datum.Longitude < 155"},
-            {"filter": "datum.year >2000"}
+            {"filter": "datum.year >= start_year"}
         ],
 
         "encoding": {
@@ -173,18 +209,13 @@
             "field": "provocation",
             "type": "nominal",
             "scale": {
-            "domain": ["provoked", "unprovoked", "null"],
-            "range": ["pink", "oragne", "grey"]
-            },
-            "title": "Level of Provocation",
-            "legend":{
-                "values": ["provoked","unprovoked","null"],
-                "labelExpr": "datum.value === 'provoked' ? 'Provoked Shark' : datum.value === 'unprovoked' ? 'No Provocation' : datum.value === 'null' ? 'Unknown' "
+                "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "null"],
+                "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
             }
         },
         
         "tooltip": [
-            {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
+            {"field": "provocation", "type": "nominal", "title": "Level of provocation"},
             {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
             {"field": "shark", "type": "nominal", "title": "Shark Species"},
             {"field": "activity", "type": "nominal", "title": "Activity"},
@@ -196,6 +227,122 @@
     ]
 }
 
-]
+
+
+
+
+
+
+
+]},{
+    "hconcat": [
+        {
+    "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "transform": [
+    {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}
+    ],
+    "width": 500,
+    "height": 450,
+    "layer": [
+    {
+    "transform": [{"filter": "datum.Year >= start_year"}],
+    "mark": {
+    "type": "area"
+    },
+    "encoding": {
+    "x": {
+    "field": "Year",
+    "type": "temporal",
+    "title": "Year",
+    "axis": {"tickCount": 10}
+    },
+    "y": {
+    "field": "incidentcount",
+    "type": "quantitative",
+    "title": "Number of Attacks"
+    },
+    "color": {
+    "field": "injury",
+    "type": "nominal",
+    "scale": {
+        "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "null"],
+        "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
     }
+    },
+    "tooltip": [
+    {"field": "Year", "type": "ordinal", "title": "Year"},
+    {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+    {"field": "injury", "type": "nominal", "title": "Injury Level"}
+]
+}
+}
+]
+},
+
+
+
+
+
+
+
+
+
+
+
+
+{
+    "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "transform": [
+    {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {"aggregate": [{"op": "count", "as": "provokedcount"}], "groupby": ["Year", "provocation"]}
+    ],
+    "width": 500,
+    "height": 450,
+    "layer": [
+    {
+    "transform": [{"filter": "datum.Year >= start_year"}],
+    "mark": {
+    "type": "area"
+    },
+    "encoding": {
+    "x": {
+    "field": "Year",
+    "type": "temporal",
+    "title": "Year",
+    "axis": {"tickCount": 10}
+    },
+    "y": {
+    "field": "provokedcount",
+    "type": "quantitative",
+    "title": "Number of Attacks"
+    },
+    "color": {
+    "field": "provocation",
+    "type": "nominal",
+    "scale": {
+        "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "null"],
+        "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
+    }
+    },
+    "tooltip": [
+    {"field": "Year", "type": "ordinal", "title": "Year"},
+    {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+    {"field": "provocation", "type": "nominal", "title": "Level of Provocatoin"}
+]
+
+    }}
+]
+}
+]
+}
+    ]
+}
+
     
