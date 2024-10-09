@@ -1,8 +1,8 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "A simple pie chart with embedded data.",
-    "width": 650,
-    "height": 650,
+    "width": 500,
+    "height": 500,
     "background": null,
     "data": {
     "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"

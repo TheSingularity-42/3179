@@ -2,6 +2,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "padding" : 5,
+     "center": true,
     "background": null,
     "params": [{
         "name": "start_year",
@@ -13,11 +14,7 @@
         "max": 2020,
         "step": 1
         }
-        },
-    {"name":"width_val",
-"value":400},
-{"name":"height_val",
-"value":600}
+        }
 ],
     "vconcat": [{
 
@@ -31,11 +28,11 @@
 
     "hconcat": [{
     "title": "Shark Attack Severity In Australia",
-    "height" : 500,
-    "width" : 600,
+    "height" : 400,
+    "width" : 550,
 
     "projection": {"type": "mercator",
-    "clipExtent": [[0, 0], [700, 460]]
+    "clipExtent": [[0, 0], [700, 365]]
 },
     "layer": [
     {
@@ -142,11 +139,11 @@
 
 
 {
-    "height" : 500,
-    "width" : 600,
+    "height" : 400,
+    "width" : 550,
     "title": "Provocation of Shark Attacks in Australia",
     "projection": {"type": "mercator",
-    "clipExtent": [[0, 0], [700, 460]]
+    "clipExtent": [[0, 0], [700, 360]]
 },
     "layer": [
     {
@@ -249,8 +246,8 @@
     "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
     },
-    "height" : 400,
-    "width" : 600,
+    "height" : 200,
+    "width" : 550,
     "transform": [
     {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
     {"calculate": "year(datum.year)", "as": "Year"},
@@ -312,8 +309,8 @@
     {"calculate": "year(datum.year)", "as": "Year"},
     {"aggregate": [{"op": "count", "as": "provokedcount"}], "groupby": ["Year", "provocation"]}
     ],
-    "height" : 400,
-    "width" : 600,
+    "height" : 200,
+    "width" : 550,
     "layer": [
     {
     "transform": [{"filter": "datum.Year >= start_year"}],
