@@ -25,7 +25,6 @@
     {
     "transform": [{"filter": "datum.Year >= start_year"}],
     "mark": {
-    "type": "line"
     "type": "area"
     },
     "encoding": {
