@@ -1,0 +1,57 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "description": "A simple pie chart with embedded data.",
+    "width": 650,
+    "height": 650,
+    "background": null,
+    "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "transform": [
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {
+    "lookup": "shark",
+    "from": {
+    "data": {
+    "values": [
+    {"shark": "bull shark"},
+    {"shark": "bronze whaler shark"},
+    {"shark": "wobbegong"},
+    {"shark": "hammerhead shark"},
+    {"shark": "tiger shark"},
+    {"shark": "white shark"}
+    ]
+    },
+    "key": "shark",
+    "fields": ["shark"]
+    },
+    "default": "other"
+    },
+    {
+    "aggregate": [{"op": "count", "as": "sharkcount"}],
+    "groupby": ["shark"]
+    }
+    ],
+    "mark": "arc",
+    "encoding": {
+    "theta": {"field": "sharkcount", "type": "quantitative"},
+    "color": {
+        "field": "shark",
+        "type": "nominal",
+        "scale": {
+        "domain": ["bull shark", "bronze whaler shark", "wobbegong", "hammerhead shark", "tiger shark", "white shark", "other"],
+        "range": ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#c7c7c7"]
+        },
+        "title": "Shark Species",
+        "legend": {
+            "titleFontSize":24,
+        "labelFontSize":16,
+        "labelExpr": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler Shark' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark' ? 'Hammerhead Shark' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : 'Other'"
+        }
+    },
+    "tooltip":[
+        {"field": "shark", "type": "nominal", "title": "Shark Species"}
+    ]
+    }
+}
+    

@@ -1,17 +1,23 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "description": "A simple pie chart with embedded data.",
+    "width": 600,
+    "height": 600,
     "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
     },
     "transform": [
         {"calculate": "year(datum.year)", "as": "Year"},
-        {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}  
+        {"aggregate": [{"op": "count", "as": "sharkcount"}], "groupby": ["Year", "shark"]}  
     ],
     "mark": "arc",
     "encoding": {
-      "theta": {"field": "incidentcount", "type": "quantitative"},
-      "color": {"field": "injury", "type": "nominal"}
+      "theta": {"field": "sharkcount", "type": "quantitative"},
+        "color": {
+        "field": "shark", "type": "nominal"},
+            "tooltip":[
+                {"field": "shark", "type": "nominal", "title": "Shark Species"}
+            ]
     }
   }
   
