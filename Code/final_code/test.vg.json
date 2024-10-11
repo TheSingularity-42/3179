@@ -1,23 +1,83 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "description": "A simple pie chart with embedded data.",
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "Sunburst chart of shark attacks by injury level and activity.",
     "width": 600,
     "height": 600,
-    "data": {
-        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
-    },
-    "transform": [
-        {"calculate": "year(datum.year)", "as": "Year"},
-        {"aggregate": [{"op": "count", "as": "sharkcount"}], "groupby": ["Year", "shark"]}  
-    ],
-    "mark": "arc",
-    "encoding": {
-      "theta": {"field": "sharkcount", "type": "quantitative"},
-        "color": {
-        "field": "shark", "type": "nominal"},
-            "tooltip":[
-                {"field": "shark", "type": "nominal", "title": "Shark Species"}
+    "padding": 5,
+    "autosize": "none",
+  
+    "data": [
+      {
+        "name": "tree",
+        "url": "https://example.com/your-data.csv",  // Replace with your data URL
+        "format": {"type": "csv"},
+        "transform": [
+          {
+            "calculate": "datum.injury === 'Severe' ? 'Severe Injury' : datum.injury === 'Minor' ? 'Minor Injury' : 'Other'",
+            "as": "injuryLevel"
+          },
+          {
+            "type": "stratify",
+            "key": "activity",
+            "parentKey": "injuryLevel"
+          },
+          {
+            "type": "aggregate",
+            "groupby": ["injuryLevel", "activity"],
+            "summarize": [
+              {
+                "op": "count",
+                "as": "size"
+              }
             ]
-    }
+          },
+          {
+            "type": "partition",
+            "field": "size",
+            "sort": {"field": "size"},
+            "size": [{"signal": "2 * PI"}, {"signal": "width / 2"}],
+            "as": ["a0", "r0", "a1", "r1", "depth", "children"]
+          }
+        ]
+      }
+    ],
+  
+    "scales": [
+      {
+        "name": "color",
+        "type": "ordinal",
+        "domain": {"data": "tree", "field": "depth"},
+        "range": {"scheme": "tableau20"}
+      }
+    ],
+  
+    "marks": [
+      {
+        "type": "arc",
+        "from": {"data": "tree"},
+        "encode": {
+          "enter": {
+            "x": {"signal": "width / 2"},
+            "y": {"signal": "height / 2"},
+            "fill": {"scale": "color", "field": "depth"},
+            "tooltip": {"signal": "datum.activity + (datum.size ? ', ' + datum.size + ' incidents' : '')"}
+          },
+          "update": {
+            "startAngle": {"field": "a0"},
+            "endAngle": {"field": "a1"},
+            "innerRadius": {"field": "r0"},
+            "outerRadius": {"field": "r1"},
+            "stroke": {"value": "white"},
+            "strokeWidth": {"value": 0.5},
+            "zindex": {"value": 0}
+          },
+          "hover": {
+            "stroke": {"value": "red"},
+            "strokeWidth": {"value": 2},
+            "zindex": {"value": 1}
+          }
+        }
+      }
+    ]
   }
   

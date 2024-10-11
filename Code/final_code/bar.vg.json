@@ -1,0 +1,105 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "transform": [
+        {
+            "calculate": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler Shark' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark' ? 'Hammerhead Shark' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : 'Other'",
+            "as" : "displayTest"
+        }
+    ],
+    "params": [
+        {
+            "name": "sharkName",
+            "value": "wobbegong",
+            "select":{
+                "type": "point",
+                "fields": ["shark"]
+            },
+            "bind" : {
+                "name" : "Shark Type ",
+                "input" : "select",
+                "options" : [
+                    "bull shark", "bronze whaler shark", "wobbegong", "hammerhead shark ","tiger shark","white shark"]
+            }
+        }
+    ],
+   "hconcat": [
+    {
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+        },
+        "transform": [
+            {"aggregate": [{"op": "count", "as": "provocationcount"}], "groupby": ["shark", "provocation"]},
+            {"filter" : {
+                "param": "sharkName"
+            }}
+        ],
+        "mark":"bar",
+        "encoding": {
+            "x": {"field":"provocation", "type": "nominal",
+                "axis": {
+                    "title" : null,
+                    "labelExpr": "datum.value === 'provoked'? 'Provoked' : datum.value === 'unprovoked' ? 'Unprovoked' : 'Unknown'"
+                }
+            },
+            "y" :{"field":"provocationcount","type":"quantitative",
+            "axis" :{
+                "title" : "Number Of Attacks"
+            }
+            },
+            "color" :{
+                "field": "provocation",
+                "type": "nominal",
+                "scale": {
+                "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "unknown"],
+                "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
+                },
+                "legend":{
+                "values": ["fatal","injured","uninjured","provoked", "unprovoked"],
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked Attack': 'No data'"
+                },
+                "title": "Legend"
+            }
+        }   
+    },
+    {
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+        },
+        "transform": [
+            {"aggregate": [{"op": "count", "as": "fatalitycount"}], "groupby": ["shark", "injury"]},
+            {"filter" : {
+                "param": "sharkName"
+            }}
+        ],
+        "mark":"bar",
+        "encoding": {
+            "x":{"field":"injury","type": "nominal",
+        "axis" :{
+            "title" : null,
+            "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Injured' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked Attack': 'No data'"
+        }
+        
+
+        },
+            "y":{"field":"fatalitycount", "type": "quantitative",
+        "axis" : {
+            "title" : null
+        }
+        },
+            "color" :{
+                "field": "injury",
+                "type": "nominal",
+                "scale": {
+                "domain": ["fatal", "injured", "uninjured","provoked", "unprovoked", "unknown"],
+                "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
+                },
+                "legend":null
+            }
+        }
+        
+    }
+
+
+   ]
+
+}

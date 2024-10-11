@@ -6,6 +6,7 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  <script src = "Code/vises.js"></script>
   
 </head>
 <body>
@@ -18,24 +19,11 @@
           )
         </body>
       </div>
-        <div id="pie" class="col"></div>
-        <script type="text/javascript">
-
-          var spec2 = "Code/final_code/pie.vg.json";
-          vegaEmbed('#pie', spec2).then(function(result) {
-            // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-          }).catch(console.error);
+          <div id="pie" class="col"></div>      
         </script>
   </div>
   <div class = "col">
-  <div id="large_vis">
-    <script type="text/javascript">
-      var spec2 = "Code/final_code/large_vis.vg.json";
-      vegaEmbed('#large_vis', spec2).then(function(result) {
-        // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-      }).catch(console.error);
-    </script>
-    </div>
+    <div id="large_vis">></div>
   </div>
 </body>
 </html>

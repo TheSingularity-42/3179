@@ -1,0 +1,203 @@
+
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "padding" : 5,
+    "background": null,
+    "hconcat": [
+        {
+"title": "Shark Attack Severity In Australia",
+    "height" : 500,
+    "width" : 600,
+
+    "projection": {"type": "mercator",
+    "clipExtent": [[0, 0], [700, 460]]
+},
+    "layer": [
+    {
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_50m_land"
+            }
+        },
+        
+    "mark": {
+        "type": "geoshape",
+        "fill": "#e6dcbe",
+        "stroke": "darkgray"
+        }
+    },
+
+    {
+    "data" : {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_50m_ocean"
+            }
+    },"mark": {
+        "type": "geoshape",
+        "fill": "#7ddcf1"
+        }
+    },
+
+    {
+    "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/clipped3.topojson",
+            "format": {
+                "type": "topojson",
+                "feature": "ne_30m_graticules_5"
+            }
+        },
+        
+    "mark": {
+        "type": "geoshape",
+        "fill": "darkgray",
+        "stroke": "darkgray"
+        }
+
+    },
+
+    {
+    "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv",
+    "format": {"type": "csv"}
+        },
+        "mark": {
+            "type": "point",
+            "tooltip": true
+        },
+        "transform": [
+            {"filter": "datum.Longitude > 110"},
+            {"filter": "datum.Longitude < 155"}
+        ],
+
+        "encoding": {
+        "longitude": {"field": "Longitude", "type": "quantitative"},
+        "latitude": {"field": "Latitude", "type": "quantitative"},
+        "size": {"value": 25},
+
+        "color": {
+            "field": "injury",
+            "type": "nominal",
+            "legend" :{
+                "title" : "map"
+            }
+        },
+        
+        "tooltip": [
+            {"field": "injury", "type": "nominal", "title": "Severity of Injury"},
+            {"field": "year", "type": "ordinal", "title": "Year Of Incident"},
+            {"field": "shark", "type": "nominal", "title": "Shark Species"},
+            {"field": "activity", "type": "nominal", "title": "Activity"},
+            {"field": "Latitude", "type": "quantitative", "title": "Latitude"},
+            {"field": "Longitude", "type":"quantitative", "title": "Longitude"}
+        ]
+    }
+    }
+    ]
+    },
+{"vconcat": [
+    {
+       "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "height" : 400,
+    "width" : 600,
+    "transform": [
+    {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}
+    ],
+    "layer": [
+    {
+    "mark": {
+    "type": "area"
+    },
+    "encoding": {
+    "x": {
+    "field": "Year",
+    "type": "temporal",
+    "title": "Year",
+    "axis": {"tickCount": 10}
+    },
+    "y": {
+    "field": "incidentcount",
+    "type": "quantitative",
+    "title": "Number of Attacks"
+    },
+    "color": {
+    "field": "injury",
+    "type": "nominal"
+    },
+    "tooltip": [
+    {"field": "Year", "type": "ordinal", "title": "Year"},
+    {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+    {"field": "injury", "type": "nominal", "title": "Injury Level"}
+] 
+    }
+    }
+]
+    },
+    {
+        "data": {
+            "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+        },
+        "transform": [
+        {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
+        {"calculate": "year(datum.year)", "as": "Year"},
+        {"aggregate": [{"op": "count", "as": "provokedcount"}], "groupby": ["Year", "provocation"]}
+        ],
+        "height" : 400,
+        "width" : 600,
+        "layer": [
+        {
+        "mark": {
+        "type": "area"
+        },
+        "encoding": {
+        "x": {
+        "field": "Year",
+        "type": "temporal",
+        "title": "Year",
+        "axis": {"tickCount": 10},
+        "scale" : {"domain":{"param": "start_year"}}
+        },
+        "y": {
+        "field": "provokedcount",
+        "type": "quantitative",
+        "title": "Number of Attacks"
+        },
+        "color": {
+        "field": "provocation",
+        "type": "nominal",
+        "legend":{
+            "title" : "graph"
+        }
+        },
+        "tooltip": [
+        {"field": "Year", "type": "ordinal", "title": "Year"},
+        {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
+        {"field": "provocation", "type": "nominal", "title": "Level of Provocatoin"}
+    ]
+    
+        }}
+    ]
+    }
+]
+}
+],
+"params": [
+    {
+      "name": "start_year",
+      "value": 1800,
+      "bind": {
+        "input": "range",
+        "min": 1800,
+        "max": 2020,
+        "step": 1
+      }
+    }
+  ]
+}

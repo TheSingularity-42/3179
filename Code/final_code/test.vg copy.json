@@ -1,0 +1,84 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "vconcat": [
+      {
+        "mark": "area",
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal"
+          },
+          "y": {
+            "field": "value",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "category",
+            "type": "nominal",
+            "legend": {
+              "title": "Category"
+            }
+          },
+          "opacity": {
+            "condition": {
+              "param": "category",
+              "value": 1
+            },
+            "value": 0.2
+          }
+        }
+      },
+      {
+        "mark": "area",
+        "encoding": {
+          "x": {
+            "field": "date",
+            "type": "temporal"
+          },
+          "y": {
+            "field": "value",
+            "type": "quantitative"
+          },
+          "color": {
+            "field": "category",
+            "type": "nominal",
+            "legend": {
+              "title": "Category"
+            }
+          },
+          "opacity": {
+            "condition": {
+              "param": "category",
+              "value": 1
+            },
+            "value": 0.2
+          }
+        }
+      }
+    ],
+    "params": [
+      {
+        "name": "time",
+        "select": {
+          "type": "interval",
+          "encodings": ["x"]
+        }
+      },
+      {
+        "name": "category",
+        "select": {
+          "type": "point",
+          "fields": ["category"]
+        },
+         "bind": "legend"
+      }
+    ],
+    "transform": [
+      {
+        "filter": {
+          "param": "time"
+        }
+      }
+    ]
+  }
+  
