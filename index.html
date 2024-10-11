@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link rel="stylesheet" href ="Code/main_style.css">
   <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
@@ -8,26 +9,32 @@
   
 </head>
 <body>
-  
-<div id="map"></div>
+  <div class = "row">
+      <div class="col">
+        <head> `Shark Ttacks within Australia</head><br>
+        <body>
+          
+          For those of us from coastal toawns in australia the topic of shark attacks is a common one, with meany people fearing for their saftey in the water due to hte precense of sharks. The basis of these presumptions hasaalways interestedme as I have spent my whole life surfing and in that environment it is just  a risk that you take.i By craeating this visualisation I im to explore trends in the sark atttacks that          to explore the reasons behind the fear people have and compare them to the informaton collected by this dataset. The first part of this is the pie cahrt to the right whcih shows some interesting trends. unsrprisingly great whichte , tigpe r and bull sharks make up the largest pwroportion of the shark attacks as they are known to be aggressive species but and interesting divergence from this is the wobbegong. For For     A wobbegong is a mall (50m) shark that usually inhabits shallow waters or reefs. they are almost entirely not aggressive but due to theier smaller size they will last hout to protect their territory (check this0 despite making up such  a large portion of the shark attacks within australia the humle wobbegong has never caused a fattal attack wtih its attacks only leading to injries. 
+          )
+        </body>
+      </div>
+        <div id="pie" class="col"></div>
+        <script type="text/javascript">
 
-<script type="text/javascript">
-
-  var spec2 = "Code/Homework2/final.vg.json";
-  vegaEmbed('#map', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
-
-<div id="graph"></div>
-
-<script type="text/javascript">
-
-  var spec2 = "Code/Homework2/homework2.vg.json";
-  vegaEmbed('#graph', spec2).then(function(result) {
-    // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
-  }).catch(console.error);
-</script>
-
+          var spec2 = "Code/final_code/pie.vg.json";
+          vegaEmbed('#pie', spec2).then(function(result) {
+          }).catch(console.error);
+        </script>
+  </div>
+  <div class = "col">
+  <div id="large_vis">
+    <script type="text/javascript">
+      var spec2 = "Code/final_code/large_vis.vg.json";
+      vegaEmbed('#large_vis', spec2).then(function(result) {
+      }).catch(console.error);
+    </script>
+    </div>
+  </div>
 </body>
 </html>
+
