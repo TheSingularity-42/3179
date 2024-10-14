@@ -8,10 +8,11 @@
         "name": "start_year",
         "value": 1800,
         "bind": {
-          "input": "range",
-          "min": 1800,
-          "max": 2020,
-          "step": 1
+            "name" : "Start Year ",
+            "input": "range",
+            "min": 1800,
+            "max": 2020,
+            "step": 1
         }
       }
     ],
@@ -247,7 +248,7 @@
     "transform": [
     {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
     {"calculate": "year(datum.year)", "as": "Year"},
-    {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year", "injury"]}
+    {"aggregate": [{"op": "count", "as": "incidentcount"}], "groupby": ["Year","injury"]}
     ],
     "layer": [
         
@@ -283,8 +284,37 @@
     {"field": "injury", "type": "nominal", "title": "Injury Level"}
 ]
 }
+},
+{
+    "layer": [{
+        "transform": [
+            {"filter": "datum.Year >= start_year"},
+            {
+                "window": [{"op": "rank", "as" : "ranking"}]
+            },
+            {
+                "sort": [{"field": "incidentcount", "order": "descending"}]
+            },
+            {
+                "filter": "datum.ranking == 1"
+            },
+            {"calculate": "'Most shark attack in time period' +datum['incidentcount']", "as": "textPlain"},
+            {
+                "calculate": "split(datum.textPlain,';')", "as" : "textFinal"
+            }
+
+        ],
+        "mark" : {
+            "type":"text"
+        },
+        "encoding": {
+            "text" : {"field":"Year"}
+        }
+    }
+    ]
 }
 ]
+
 },
 
 
@@ -334,7 +364,7 @@
     "tooltip": [
     {"field": "Year", "type": "ordinal", "title": "Year"},
     {"field": "incidentcount", "type": "quantitative", "title": "Number of Attacks"},
-    {"field": "provocation", "type": "nominal", "title": "Level of Provocatoin"}
+    {"field": "provocation", "type": "nominal", "title": "Level of Provocation"}
 ]
 
     }}

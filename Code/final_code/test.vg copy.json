@@ -1,84 +1,77 @@
 {
-    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "vconcat": [
-      {
-        "mark": "area",
-        "encoding": {
-          "x": {
-            "field": "date",
-            "type": "temporal"
-          },
-          "y": {
-            "field": "value",
-            "type": "quantitative"
-          },
-          "color": {
-            "field": "category",
-            "type": "nominal",
-            "legend": {
-              "title": "Category"
-            }
-          },
-          "opacity": {
-            "condition": {
-              "param": "category",
-              "value": 1
-            },
-            "value": 0.2
-          }
-        }
-      },
-      {
-        "mark": "area",
-        "encoding": {
-          "x": {
-            "field": "date",
-            "type": "temporal"
-          },
-          "y": {
-            "field": "value",
-            "type": "quantitative"
-          },
-          "color": {
-            "field": "category",
-            "type": "nominal",
-            "legend": {
-              "title": "Category"
-            }
-          },
-          "opacity": {
-            "condition": {
-              "param": "category",
-              "value": 1
-            },
-            "value": 0.2
-          }
-        }
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "params": [
+    {
+      "name": "categorySelect",
+      "select": {
+        "type": "point",
+        "fields": ["category"],
+        "value": "A",
+        "on": "click"
       }
-    ],
-    "params": [
-      {
-        "name": "time",
-        "select": {
-          "type": "interval",
-          "encodings": ["x"]
-        }
-      },
-      {
-        "name": "category",
-        "select": {
-          "type": "point",
-          "fields": ["category"]
-        },
-         "bind": "legend"
-      }
-    ],
-    "transform": [
-      {
-        "filter": {
-          "param": "time"
-        }
-      }
+    }
+  ],
+  "data": {
+    "values": [
+      {"category": "A", "value": 10},
+      {"category": "B", "value": 20},
+      {"category": "C", "value": 30}
     ]
-  }
-  
+  },
+  "layer": [
+    {
+      "mark": "arc",
+      "encoding": {
+        "theta": {
+          "field": "value",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "category",
+          "type": "nominal"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.category === categorySelect.category"
+        }
+      ]
+    },
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "category",
+          "type": "nominal"
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.category === categorySelect.category"
+        }
+      ]
+    },
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "category",
+          "type": "nominal"
+        },
+        "y": {
+          "field": "value",
+          "type": "quantitative"
+        }
+      },
+      "transform": [
+        {
+          "filter": "datum.category === categorySelect.category"
+        }
+      ]
+    }
+  ]
+}

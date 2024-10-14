@@ -1,36 +1,96 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "transform": [
-        {
-            "calculate": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler Shark' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark' ? 'Hammerhead Shark' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : 'Other'",
-            "as" : "displayTest"
-        }
-    ],
     "params": [
         {
-            "name": "sharkName",
-            "value": "wobbegong",
-            "select":{
+            "name": "selectFilter",
+            "select" :{
                 "type": "point",
-                "fields": ["shark"]
-            },
-            "bind" : {
-                "name" : "Shark Type ",
-                "input" : "select",
-                "options" : [
-                    "bull shark", "bronze whaler shark", "wobbegong", "hammerhead shark ","tiger shark","white shark"]
+                "fields": ["shark"],
+                "on" : "click"
             }
         }
     ],
+    "vconcat" :[
+        
+        {
+    "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+    },
+    "width" :200,
+    "height" : 200,
+    "transform": [
+    {"calculate": "year(datum.year)", "as": "Year"},
+    {
+        "lookup": "shark",
+        "from": {
+        "data": {
+        "values": [
+        {"shark": "bull shark"},
+        {"shark": "bronze whaler shark"},
+        {"shark": "wobbegong"},
+        {"shark": "hammerhead shark "},
+        {"shark": "tiger shark"},
+        {"shark": "white shark"}
+    ]
+    },
+        "key": "shark",
+        "fields": ["shark"]
+    },
+        "default": "other"
+    },
+
+    {"aggregate": [{"op": "count", "as": "sharkcount"}], "groupby": ["shark"]}
+    ],
+    "mark": "arc",
+    "encoding": {
+    "theta": {"field": "sharkcount", "type": "quantitative"
+    },
+    "color": {
+        "field": "shark",
+        "type": "nominal",
+        "scale": {
+        "domain": ["bull shark", "bronze whaler shark", "wobbegong", "hammerhead shark ", "tiger shark", "white shark", "other"],
+        "range": ["#4A4A4A", "#914928", "#c19a6b", "#4e7496", "#b24022", "#6e7784", "#c7c7c7"]
+        },
+        "title": "Shark Species",
+        "legend": {
+            "title": "Shark Species",
+            "titleFontSize":24,
+        "labelFontSize":16,
+        "labelExpr": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler Shark' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark ' ? 'Hammerhead Shark' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : datum.value === 'wobbegong' ? 'Wobbegong' : 'Other'"
+        }
+    },
+    "opacity" :{
+        "condition" : {
+            "param": "selectFilter",
+            "value" : 1
+        },
+        "value" : 0.3
+        },
+    "tooltip":[
+        {"field": "shark", "type": "nominal", "title": "Shark Species"},
+        {"field" :"sharkcount" , "title" : "Number Of Attacks"}
+    ]
+    }
+
+        },
+        {
+
+
+
+
+
    "hconcat": [
     {
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
         },
+        "width" : 100,
+        "height" : 200,
         "transform": [
             {"aggregate": [{"op": "count", "as": "provocationcount"}], "groupby": ["shark", "provocation"]},
             {"filter" : {
-                "param": "sharkName"
+                "param": "selectFilter"
             }}
         ],
         "mark":"bar",
@@ -54,6 +114,9 @@
                 "range": ["red", "blue", "green", "#fb00a4","orange","grey"]
                 },
                 "legend":{
+                    "title": "Type of Attack",
+                    "titleFontSize":24,
+                    "labelFontSize":16,
                 "values": ["fatal","injured","uninjured","provoked", "unprovoked","unknown"],
                 "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked Attack': 'Unknown'"
                 },
@@ -71,10 +134,12 @@
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
         },
+        "width" : 100,
+        "height" : 200,
         "transform": [
             {"aggregate": [{"op": "count", "as": "fatalitycount"}], "groupby": ["shark", "injury"]},
             {"filter" : {
-                "param": "sharkName"
+                "param": "selectFilter"
             }}
         ],
         "mark":"bar",
@@ -110,5 +175,12 @@
 
 
    ]
-
+}
+],
+"resolve": {
+    "legend": {
+        "color": "independent"
+    },
+    "scale": {"color": "independent"}
+}
 }

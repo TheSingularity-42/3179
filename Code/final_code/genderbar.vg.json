@@ -1,0 +1,35 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+       },
+       "transform": [
+        {"aggregate": [{"op": "count","as": "genderCount"}], "groupby": ["Victim.gender"]}
+       ],
+       "layer": [{
+        "mark":"bar",
+        "encoding": {
+            "x" : {
+                "title" : "Victim Gender",  
+                "field" : "Victim.gender",
+                "type" : "nominal"
+            },
+            "y" : {
+                "title" : "Number Of Attacks",
+                "field" : "genderCount",
+                "type": "quantitative"
+            },
+            "color": {
+                "field" : "gender",
+                "type": "nominal",
+                    "legend" :{
+                        "title" : "Activity",
+                        "labelExpr": "datum.value === 'male' ? 'Male' : datum.value === 'female' ? 'Female' : 'Other'"
+                    }
+            }
+        }
+       }
+       ]
+}
