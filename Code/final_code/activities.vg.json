@@ -1,0 +1,80 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+
+
+        "data": {
+        "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+       },
+       "title" : "Common Activities vs Attacks",
+       "transform": [
+        {"aggregate": [{"op": "count","as": "actCount"}], "groupby": ["month", "activity"]},
+        {"window": [{"op":"max", "field": "actCount", "as": "maxCount"}]}
+       ],
+       "background" : null,
+       "layer": [{
+        "mark":"line",
+        "encoding": {
+            "x" : {
+                "title" : "Month",  
+                "field" : "month",
+                "type" : "ordinal",
+                "sort" : "ascending",
+                "timeUnit" : "month",
+                "axis":{
+                    "labelAngle" :45
+                }
+            },
+            "y" : {
+                "title" : "Number Of Attacks",
+                "field" : "actCount",
+                "type": "quantitative"
+            },
+            "color": {
+                "field" : "activity",
+                "type": "nominal",
+                    "scale" : {
+                        "domain": ["boarding", "diving", "swimming", "fishing"]
+                    },
+                    "legend" :{
+                        "title" : "Activity",
+                        "labelExpr": "datum.value === 'boarding' ? 'Boarding' : datum.value === 'diving' ? 'Diving' : datum.value === 'swimming' ? 'Swimming' : datum.value ===  'fishing' ? 'Fishing' : 'Other'"
+                    }
+            },
+            "tooltip" : [
+                {"field": "activity", "type": "nominal", "title": "Activity"},
+                {"field": "month", "type": "temporal", "timeUnit" : "month", "title" : "Month"},
+                {"field": "actCount", "type": "quantitative","title": "Attacks"}
+            ]
+        }
+       },
+       {
+        "mark" : {
+         "type":   "text",
+         "dx" : 120
+        },
+        "transform": [
+            {"calculate": "'Most common: '+datum.activity+', '+datum.actCount+' attacks'", "as": "newText"},
+            {"filter": "datum.actCount === datum.maxCount"}
+        ],
+        "encoding":{
+                "x" : {
+                    "field" : "month",
+                    "type": "ordinal",
+                    "sort" : "ascending",
+                    "timeUnit" : "month"
+                
+                },
+                "y" : {
+                    "field" : "actCount",
+                    "type": "quantitative",
+                    "aggregate" : "max"
+                },
+                "text" : {
+                    "field": "newText",
+                    "type": "nominal"
+                }
+                
+            }
+       }
+       ]
+}

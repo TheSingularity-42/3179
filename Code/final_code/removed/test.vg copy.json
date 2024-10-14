@@ -1,0 +1,75 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "data": {
+    "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [
+        { "op": "count", "as": "actCount" }
+      ],
+      "groupby": ["month", "activity"]
+    },
+    {
+      "window": [
+        { "op": "max", "field": "actCount", "as": "maxCount" }
+      ],
+      "groupby": []
+    },
+    {
+      "filter": "datum.actCount === datum.maxCount"
+    },
+    {
+      "calculate": "'Most attacked activity: ' + datum.activity + ' with ' + datum.actCount + ' attacks'",
+      "as": "annotationText"
+    }
+  ],
+  "layer": [
+    {
+      "mark": "line",
+      "encoding": {
+        "x": {
+          "title": "Month",
+          "field": "month",
+          "type": "ordinal",
+          "axis": {
+            "labelAngle": 45
+          }
+        },
+        "y": {
+          "title": "Number Of Attacks",
+          "field": "actCount",
+          "type": "quantitative"
+        },
+        "color": {
+          "field": "activity",
+          "type": "nominal",
+          "scale": {
+            "domain": ["boarding", "diving", "swimming", "fishing"]
+          },
+          "legend": {
+            "title": "Activity"
+          }
+        }
+      }
+    },
+    {
+      "mark": "text",
+      "encoding": {
+        "x": {
+          "field": "month",
+          "type": "ordinal"
+        },
+        "y": {
+          "field": "actCount",
+          "type": "quantitative",
+          "aggregate": "max" 
+        },
+        "text": {
+          "field": "annotationText",
+          "type": "nominal"
+        }
+      }
+    }
+  ]
+}
