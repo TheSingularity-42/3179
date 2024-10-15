@@ -7,13 +7,20 @@
         "contains": "content"
     },
     "config": {
+        "font": "Raleway",
         "title": {
-            "fontSize" : 28  
+            "fontSize" : 28,  
+            "font" : "Quicksand",
+            "color" : "#003d30"
         },
         "axis": {
             "titleFontSize" : 24,
-            "labelFontSize" :20,
-            "labelFontWeight": 600
+            "titleFont" : "Quicksand", 
+            "titleColor" : "#004d40",
+            "labelFontSize" :18,
+            "labelFontWeight": 600,
+            "labelFont" : "Raleway",
+            "labelColor" : "#00796b"
         },
         "view": {
             "stroke" : "transparent",
@@ -21,13 +28,19 @@
             
         },
         "legend": {
-            "titleFontSize": 26,
-            "labelFontSize" : 20
+            "titleFontSize": 24,
+            "titleColor" : "#003d30",
+            "labelFontSize" : 16,
+            "titleFont" : "Quicksand",
+            "labelFont": "Raleway",
+            "labelColor" : "#004d40"
         },
         "text": {
-            "fontSize" : 20
+            "fontSize" : 18,
+            "font": "QuickSand",
+            "color" :"#004d40"
         }
-        
+    
     },
     "background": null,
     "center": true,
@@ -65,10 +78,10 @@
     
     
     
-    "height" : 500,
-    "width" : 600,
+    "height" : 400,
+    "width" : 480,
     "projection": {"type": "mercator",
-    "clipExtent": [[0, 0], [700, 460]]
+    "clipExtent": [[0, 0], [700, 360]]
 },
     "layer": [
     {
@@ -170,11 +183,11 @@
 
 
 {
-    "height" : 500,
-    "width" : 600,
+    "height" : 400,
+    "width" : 480,
     "title": "Provocation of Shark Attacks in Australia",
     "projection": {"type": "mercator",
-    "clipExtent": [[0, 0], [700, 460]]
+    "clipExtent": [[0, 0], [700, 360]]
 },
     "layer": [
     {
@@ -275,8 +288,8 @@
     "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
     },
-    "height" : 400,
-    "width" : 560,
+    "height" : 250,
+    "width" : 450,
     "transform": [
     {"filter": "datum.injury == 'injured' || datum.injury == 'uninjured' || datum.injury == 'fatal'"},
     {"calculate": "year(datum.year)", "as": "Year"},
@@ -341,8 +354,8 @@
     {"calculate": "year(datum.year)", "as": "Year"},
     {"aggregate": [{"op": "count", "as": "provokedcount"}], "groupby": ["Year", "provocation"]}
     ],
-    "height" : 400,
-    "width" : 560,
+    "height" : 250,
+    "width" : 450,
     "layer": [
     {
     "transform": [{"filter": "datum.Year >= start_year"}],

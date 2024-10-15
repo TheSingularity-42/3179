@@ -12,13 +12,20 @@
         }
     ],
     "config": {
+        "font": "Raleway",
         "title": {
-            "fontSize" : 28  
+            "fontSize" : 28,  
+            "font" : "Quicksand",
+            "color" : "#003d30"
         },
         "axis": {
             "titleFontSize" : 24,
-            "labelFontSize" :20,
-            "labelFontWeight": 600
+            "titleFont" : "Quicksand", 
+            "titleColor" : "#004d40",
+            "labelFontSize" :18,
+            "labelFontWeight": 600,
+            "labelFont" : "Raleway",
+            "labelColor" : "#00796b"
         },
         "view": {
             "stroke" : "transparent",
@@ -26,13 +33,19 @@
             
         },
         "legend": {
-            "titleFontSize": 26,
-            "labelFontSize" : 20
+            "titleFontSize": 24,
+            "titleColor" : "#003d30",
+            "labelFontSize" : 16,
+            "titleFont" : "Quicksand",
+            "labelFont": "Raleway",
+            "labelColor" : "#004d40"
         },
         "text": {
-            "fontSize" : 20
+            "fontSize" : 18,
+            "font": "QuickSand",
+            "color" :"#004d40"
         }
-        
+    
     },
     "vconcat" :[
         
@@ -40,10 +53,11 @@
     "data": {
     "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
     },
-    "width" :350,
-    "height" : 400,
+    "width" :250,
+    "height" : 300,
     "title" : {
             "text" : "Click to Filter By Shark Type",
+            "fontSize" : 16,
             "anchor": "end",
             "orient" : "bottom",
             "align": "right"
@@ -113,8 +127,8 @@
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
         },
-        "width" : 175,
-        "height" : 400,
+        "width" : 125,
+        "height" : 300,
         "transform": [
             {"aggregate": [{"op": "count", "as": "provocationcount"}], "groupby": ["shark", "provocation"]},
             {"filter" : {
@@ -162,8 +176,8 @@
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
         },
-        "width" : 175,
-        "height" : 400,
+        "width" : 125,
+        "height" : 300,
         "transform": [
             {"aggregate": [{"op": "count", "as": "fatalitycount"}], "groupby": ["shark", "injury"]},
             {"filter" : {
