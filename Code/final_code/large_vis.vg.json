@@ -159,7 +159,7 @@
             "legend" : {
                 "title": "Type of Attack",
                 "values": ["fatal","injured","uninjured","provoked", "unprovoked","unknown"],
-                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked': 'Unknown'"
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked': 'Unknown'"
             }
 
         },

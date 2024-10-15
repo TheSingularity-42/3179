@@ -96,7 +96,7 @@
          "dx" : 200
         },
         "transform": [
-            {"calculate": "datum.activity+', '+datum.actCount+' attacks'", "as": "newText"},
+            {"calculate": "'Most common: '+datum.activity+', '+datum.actCount+' attacks'", "as": "newText"},
             {"filter": "datum.actCount === datum.maxCount"}
         ],
         "encoding":{
