@@ -17,7 +17,8 @@
         },
         "axis": {
             "titleFontSize" : 24,
-            "labelFontSize" :16
+            "labelFontSize" :20,
+            "labelFontWeight": 600
         },
         "view": {
             "stroke" : "transparent",
@@ -25,7 +26,11 @@
             
         },
         "legend": {
-            "titleFontSize": 26
+            "titleFontSize": 26,
+            "labelFontSize" : 20
+        },
+        "text": {
+            "fontSize" : 20
         }
         
     },
@@ -37,6 +42,12 @@
     },
     "width" :350,
     "height" : 400,
+    "title" : {
+            "text" : "Click to Filter By Shark Type",
+            "anchor": "end",
+            "orient" : "bottom",
+            "align": "right"
+        },
     "transform": [
     {"calculate": "year(datum.year)", "as": "Year"},
     {
@@ -74,14 +85,12 @@
         "title": "Shark Species",
         "legend": {
             "title": "Shark Species",
-            "titleFontSize":24,
-        "labelFontSize":16,
-        "labelExpr": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler Shark' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark ' ? 'Hammerhead Shark' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : datum.value === 'wobbegong' ? 'Wobbegong' : 'Other'"
+        "labelExpr": "datum.value === 'bull shark' ? 'Bull Shark' : datum.value === 'bronze whaler shark' ? 'Bronze Whaler' : datum.value === 'blind shark' ? 'Blind Shark' : datum.value === 'hammerhead shark ' ? 'Hammerhead' : datum.value === 'tiger shark' ? 'Tiger Shark' : datum.value === 'white shark' ? 'White Shark' : datum.value === 'wobbegong' ? 'Wobbegong' : 'Other'"
         }
     },
     "opacity" :{
         "condition" : {
-            "param": "selectFilter",
+            "param": "selectFilter" ,
             "value" : 1
         },
         "value" : 0.3
@@ -135,10 +144,8 @@
                 },
                 "legend":{
                     "title": "Type of Attack",
-                    "titleFontSize":24,
-                    "labelFontSize":16,
                 "values": ["fatal","injured","uninjured","provoked", "unprovoked","unknown"],
-                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked Attack': 'Unknown'"
+                "labelExpr": "datum.value === 'fatal' ? 'Fatal Injury' : datum.value === 'injured' ? 'Non-Fatal Injury' : datum.value === 'uninjured' ? 'Uninjured' : datum.value === 'provoked' ? 'Provoked Shark': datum.value === 'unprovoked' ? 'Unprovoked': 'Unknown'"
                 },
                 "title": "Legend"
             },

@@ -12,7 +12,8 @@
         },
         "axis": {
             "titleFontSize" : 24,
-            "labelFontSize" :16
+            "labelFontSize" :20,
+            "labelFontWeight": 600
         },
         "view": {
             "stroke" : "transparent",
@@ -20,8 +21,13 @@
             
         },
         "legend": {
-            "titleFontSize": 26
+            "titleFontSize": 26,
+            "labelFontSize" : 20
+        },
+        "text": {
+            "fontSize" : 20
         }
+        
     },
     "background": null,
     "center": true,
