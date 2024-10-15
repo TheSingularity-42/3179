@@ -2,20 +2,47 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: 2%;
+    padding-right: 2%;
     background-color: #e0f7fa;
     color: #004d40; 
     }
+h1 {
+    font-family: 'Bungee', cursive;
+    font-size: 50px;
+}
+h2 {
+    color: #004d40; 
+    font-size: 30px;
+
+}
+
+p {
+    color: #004d40; 
+    font-size: 24px;
+    font-family: 'Quicksand';
+    font-weight: 600;
+}
     
+.mainTitle {
+    padding: 0%;
+    margin-bottom: 3px;
+}
+.nameTitle {
+    padding: 0;
+    margin: 0;
+    margin-bottom: 20px;
+}
+
 .row {
     display: flex; 
 }
     
 .col {
     flex: 1; 
-    padding: 1em;
-    width: 70%;
+    padding-right: 50px;
+    padding-left: 50px;
+    width: 100%;
 }
 
 .container {
@@ -24,35 +51,8 @@ body {
     height: 100vh;
 }
 
-.top-section {
-    display: flex;
-    flex: 1;
-    border-bottom: 2px solid #004d40; 
-}
 
-.top-left, .top-right {
-    flex: 1;
-    padding: 20px;
-    background-color: #b2ebf2;
-}
 
-.top-left {
-    border-right: 2px solid #004d40; 
-}
-
-.bottom-section {
-    flex: 2;
-    padding: 20px;
-    background-color: #80deea;
-}
-
-h2 {
-    color: #004d40; 
-}
-
-p {
-    color: #004d40; 
-}
 
 #visualization {
     background-color: #ffffff; 
@@ -61,3 +61,28 @@ p {
     border-radius: 10px;
 }
 
+#large_vis    {
+    width: 100%;
+    padding: 5px;
+    align-content: center;
+       
+}
+
+#barpie {
+    height: auto;
+    width: 200px;
+
+}
+
+#gender {
+    width: 300px;
+}
+
+.vega-bind {
+    font-size : 200%;
+    margin: 10px auto;
+}
+input[type="range"] {
+    height: 40px;
+    width: 200px;
+}

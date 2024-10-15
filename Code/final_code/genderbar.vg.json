@@ -5,6 +5,29 @@
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
        },
+       "autosize" :{
+        "type": "pad",
+        "contains": "content"
+    },
+    "width" : "container",
+    "config": {
+        "title": {
+            "fontSize" : 28  
+        },
+        "axis": {
+            "titleFontSize" : 24,
+            "labelFontSize" :16
+        },
+        "view": {
+            "stroke" : "transparent",
+            "discreteWidth": {"step": 10}
+            
+        },
+        "legend": {
+            "titleFontSize": 26
+        }
+        
+    },
        "background" : null,
        "transform": [
         {"aggregate": [{"op": "count", "field" : "gender", "as": "genderCount"}], "groupby": ["gender"]}

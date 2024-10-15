@@ -2,7 +2,29 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "padding" : 5,
+    "autosize" :{
+        "type": "pad",
+        "contains": "content"
+    },
+    "config": {
+        "title": {
+            "fontSize" : 28  
+        },
+        "axis": {
+            "titleFontSize" : 24,
+            "labelFontSize" :16
+        },
+        "view": {
+            "stroke" : "transparent",
+            "discreteWidth": {"step": 10}
+            
+        },
+        "legend": {
+            "titleFontSize": 26
+        }
+    },
     "background": null,
+    "center": true,
         "params": [
       {
         "name": "start_year",
@@ -11,18 +33,19 @@
             "name" : "Start Year ",
             "input": "range",
             "min": 1800,
-            "max": 2020,
+            "max": 2024,
             "step": 1
         }
       }
     ],
+    
     
 
 
     "vconcat": [
         {
         
-
+            
 
 
 
@@ -33,6 +56,9 @@
 
 
     "title": "Shark Attack Severity In Australia",
+    
+    
+    
     "height" : 500,
     "width" : 600,
     "projection": {"type": "mercator",
@@ -284,34 +310,6 @@
     {"field": "injury", "type": "nominal", "title": "Injury Level"}
 ]
 }
-},
-{
-    "layer": [{
-        "transform": [
-            {"filter": "datum.Year >= start_year"},
-            {
-                "window": [{"op": "rank", "as" : "ranking"}]
-            },
-            {
-                "sort": [{"field": "incidentcount", "order": "descending"}]
-            },
-            {
-                "filter": "datum.ranking == 1"
-            },
-            {"calculate": "'Most shark attack in time period' +datum['incidentcount']", "as": "textPlain"},
-            {
-                "calculate": "split(datum.textPlain,';')", "as" : "textFinal"
-            }
-
-        ],
-        "mark" : {
-            "type":"text"
-        },
-        "encoding": {
-            "text" : {"field":"Year"}
-        }
-    }
-    ]
 }
 ]
 

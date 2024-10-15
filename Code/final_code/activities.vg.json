@@ -5,7 +5,34 @@
         "data": {
         "url": "https://raw.githubusercontent.com/TheSingularity-42/3179/main/VegaLite/Assignment2Data/SharkAttacks.csv"
        },
+       "autosize" :{
+        "type": "pad",
+        "contains": "content"
+    },
+    "config": {
+        "title": {
+            "fontSize" : 28  
+        },
+        "axis": {
+            "titleFontSize" : 24,
+            "labelFontSize" :16
+        },
+        "view": {
+            "stroke" : "transparent",
+            "discreteWidth": {"step": 10}
+            
+        },
+        "legend": {
+            "titleFontSize": 26
+        },
+        "text": {
+            "fontSize" : 20
+        }
+        
+    },
        "title" : "Common Activities vs Attacks",
+       "width": 400,
+       "height" : 450,
        "transform": [
         {"aggregate": [{"op": "count","as": "actCount"}], "groupby": ["month", "activity"]},
         {"window": [{"op":"max", "field": "actCount", "as": "maxCount"}]}
@@ -37,7 +64,10 @@
                     },
                     "legend" :{
                         "title" : "Activity",
-                        "labelExpr": "datum.value === 'boarding' ? 'Boarding' : datum.value === 'diving' ? 'Diving' : datum.value === 'swimming' ? 'Swimming' : datum.value ===  'fishing' ? 'Fishing' : 'Other'"
+                        "labelExpr": "datum.value === 'boarding' ? 'Boarding' : datum.value === 'diving' ? 'Diving' : datum.value === 'swimming' ? 'Swimming' : datum.value ===  'fishing' ? 'Fishing' : 'Other'",
+                        "labelFontSize" : 18,
+                        "symbolSize": 400,
+                        "symbolStrokeWidth" : 15
                     }
             },
             "tooltip" : [
@@ -50,7 +80,7 @@
        {
         "mark" : {
          "type":   "text",
-         "dx" : 120
+         "dx" : 200
         },
         "transform": [
             {"calculate": "'Most common: '+datum.activity+', '+datum.actCount+' attacks'", "as": "newText"},

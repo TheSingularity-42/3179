@@ -6,35 +6,91 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
-  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+  <script src="Code/vises.js"></script>
 </head>
-<body>
+<body class = "container">
+  <h1 class = "mainTitle">Shark Attacks in Australia</h1>
+  <h2 class = "nameTitle">FIT 3179 Reuben Kobier</h2>
   <div class = "row">
-      <div class="col">
-        <head> `Shark Ttacks within Australia</head><br>
-        <body>
-          
-          For those of us from coastal toawns in australia the topic of shark attacks is a common one, with meany people fearing for their saftey in the water due to hte precense of sharks. The basis of these presumptions hasaalways interestedme as I have spent my whole life surfing and in that environment it is just  a risk that you take.i By craeating this visualisation I im to explore trends in the sark atttacks that          to explore the reasons behind the fear people have and compare them to the informaton collected by this dataset. The first part of this is the pie cahrt to the right whcih shows some interesting trends. unsrprisingly great whichte , tigpe r and bull sharks make up the largest pwroportion of the shark attacks as they are known to be aggressive species but and interesting divergence from this is the wobbegong. For For     A wobbegong is a mall (50m) shark that usually inhabits shallow waters or reefs. they are almost entirely not aggressive but due to theier smaller size they will last hout to protect their territory (check this0 despite making up such  a large portion of the shark attacks within australia the humle wobbegong has never caused a fattal attack wtih its attacks only leading to injries. 
-          )
-        </body>
-      </div>
-        <div id="pie" class="col"></div>
-        <script type="text/javascript">
+    <div class = "col">
+      <div class="row">
 
-          var spec2 = "Code/final_code/pie.vg.json";
-          vegaEmbed('#pie', spec2).then(function(result) {
-          }).catch(console.error);
-        </script>
-  </div>
-  <div class = "col">
-  <div id="large_vis">
-    <script type="text/javascript">
-      var spec2 = "Code/final_code/large_vis.vg.json";
-      vegaEmbed('#large_vis', spec2).then(function(result) {
-      }).catch(console.error);
-    </script>
+        <div class = "col">
+          <h2>Why Sharks?</h2>
+          <p>
+              Australia holds a reputation as one of the most beach going countries in the world, 
+              but for many people in Australia fear of sharks holds them back from enjoying the
+              many beautiful beaches spread throughout Australia.  As such this dashboard will 
+              explore and examine the statistics behind this shared fear as well as any trends 
+              that may appear in the data.
+              <br> <br>
+              The baseline statistics in the figure to the right are quite important, as it can
+              be seen there are 4 main species of shark that attack people within Australia, 
+              the Bull Shark, Wobbegong, Tiger Shark, and White Shark (also known as Great White).
+              Of note here is the Wobbegong, a small shark (150-180cm) which inhabits the South
+              and East coasts of Australia, while they do make up a significant number of the
+              attacks on humans they have never caused a fatality, in addition nearly 50% of 
+              attacks from Wobbegongs are considered ‘provoked’, usually meaning that the shark 
+              was trodden on.  The other sharks that dominate these statistics are known for being
+              aggressive as a result of their predatory nature but even then the majority of attacks
+              do not result in fatalities. 
+
+
+          </p>
+        </div>
+
+        <div class = "col">
+          <div id = "barpie"></div>
+        </div>
+        
+      </div>
+
+      <div class  = "row">
+
+        <div class = "col">
+          <div id  = "activities"></div>
+        </div>
+
+        <div class = "col">
+          <p>When considering the activities that are most commonly attacked swimming,
+             and boarding (bogey boarding and surfing) are the most common for shark 
+             attacks. This unsurprisingly peaks in summer when these activities are 
+             at their peak. This can be compared with the geographical data shown above, 
+             where it can be clearly seen that the majority of attacks occur along the 
+             East coast of Australia where these attacks are most common. Interestingly 
+             a large amount of the aggravated attacks that have occurred are in Queensland, 
+             likely as a result of tourism to the Great Barrier Reef and cage diving. 
+              <br><br>
+              This trend continues further when analysing the number of attacks as 
+              they increase over time, namely, there is a significant increase in 
+              the number of yearly attacks after ~1980. An increase in tourism post 
+              WWII as well as developments in infrastructure and tourism campaigns 
+              would have brought both more Australians, and tourists from outside the 
+              country to the beaches, drastically increasing the likelihood of shark attacks.               
+            
+            </p>
+          </div>
+
+      </div>
+
+    </div>
+    <div class = "col">
+
+        <div id="large_vis"></div>
+      
     </div>
   </div>
+  
+
+ 
+  
+
+
+
 </body>
 </html>
 
