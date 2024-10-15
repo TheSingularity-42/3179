@@ -46,7 +46,7 @@
     
     },
        "title" : "Common Activities vs Attacks",
-       "width": 300,
+       "width": 400,
        "height" : 450,
        "transform": [
         {"aggregate": [{"op": "count","as": "actCount"}], "groupby": ["month", "activity"]},
